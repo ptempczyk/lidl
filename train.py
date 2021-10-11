@@ -114,6 +114,9 @@ def train(args, model, optimizer):
                 current_loss = np.mean(losses)
                 print(f"{current_loss},{args.delta},{i + 1}", file=f_test_loss)
                 epoch_losses.append(current_loss)
+                # early stopping
+                if len(epoch_losses) >= 10 and epoch_losses[-10] < min(epoch_losses[-9:]):
+                    break
                 '''
                 too much space
                 if (i + 1) % 5 == 0:
