@@ -292,3 +292,408 @@ def ffhq_50(batch_size, image_size, n_channels, return_y=False):
     else:
         raise ValueError("ffhq_50 does not contain y labels")
 
+
+def cifar_horses_20(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    train_loader = get_loader("/home/rm360179/image-generator/cifar_horses_20/train/")
+    train_val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_20/train_val/")
+    val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_20/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+
+def cifar_horses_80(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    train_loader = get_loader("/home/rm360179/image-generator/cifar_horses_80/train/")
+    train_val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_80/train_val/")
+    val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_80/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+
+def mnist_30(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.ToPILImage(),
+                        #transforms.Resize(64),
+                        transforms.Pad(2),
+                        #transforms.CenterCrop(64),
+                        transforms.Grayscale(),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5,), (0.5,)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    train_loader = get_loader("/home/rm360179/datasets/mnist_30/train/")
+    train_val_loader = get_loader("/home/rm360179/datasets/mnist_30/train_val/")
+    val_loader = get_loader("/home/rm360179/datasets/mnist_30/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+
+def mnist_gan_all(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.ToPILImage(),
+                        #transforms.Resize(64),
+                        transforms.Pad(2),
+                        #transforms.CenterCrop(64),
+                        transforms.Grayscale(),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5,), (0.5,)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    train_loader = get_loader("/home/rm360179/datasets/mnist_gan_all/train/")
+    train_val_loader = get_loader("/home/rm360179/datasets/mnist_gan_all/train_val/")
+    val_loader = get_loader("/home/rm360179/datasets/mnist_gan_all/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+
+def mnist_pad(batch_size, image_size, n_channels, return_y=False):
+    transform = transforms.Compose(
+        [
+            transforms.ToPILImage(),
+            transforms.Pad(10),
+            transforms.ToTensor(),
+            transforms.Normalize((0.5,) * n_channels, (1,) * n_channels),
+        ]
+    )
+    data = torchvision.datasets.MNIST(
+        "~/datasets/mnist/", train=True, download=True, transform=transform
+    )
+
+    train_data = CustomTensorDataset(data.data[:55000].clone(), transform=transform)
+    train_val_data = CustomTensorDataset(
+        data.data[50000:55000].clone(), transform=transform
+    )
+    val_data = CustomTensorDataset(data.data[55000:].clone(), transform=transform)
+    train_loader = torch.utils.data.DataLoader(
+        train_data,
+        batch_size=batch_size,
+        shuffle=False,
+    )
+    train_val_loader = torch.utils.data.DataLoader(
+        train_val_data,
+        batch_size=batch_size,
+        shuffle=False,
+    )
+    val_loader = torch.utils.data.DataLoader(
+        val_data,
+        batch_size=batch_size,
+        shuffle=False,
+    )
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        return (
+            train_loader,
+            val_loader,
+            train_val_loader,
+            data.targets[:55000],
+            data.targets[55000:],
+            data.targets[50000:55000],
+        )
+
+
+def cifar_horses_20_top(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = "/home/rm360179/datasets/cifar_horses_20_top"
+    train_loader = get_loader(f"{dataset_path}/train/")
+    train_val_loader = get_loader(f"{dataset_path}/train_val/")
+    val_loader = get_loader(f"{dataset_path}/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+
+def cifar_horses_40_top(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = "/home/rm360179/datasets/cifar_horses_40_top"
+    train_loader = get_loader(f"{dataset_path}/train/")
+    train_val_loader = get_loader(f"{dataset_path}/train_val/")
+    val_loader = get_loader(f"{dataset_path}/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+def cifar_horses_20_top_small_lr(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = "/home/rm360179/datasets/cifar_horses_20_top"
+    train_loader = get_loader(f"{dataset_path}/train/")
+    train_val_loader = get_loader(f"{dataset_path}/train_val/")
+    val_loader = get_loader(f"{dataset_path}/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+
+def cifar_horses_40_top_small_lr(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = "/home/rm360179/datasets/cifar_horses_40_top"
+    train_loader = get_loader(f"{dataset_path}/train/")
+    train_val_loader = get_loader(f"{dataset_path}/train_val/")
+    val_loader = get_loader(f"{dataset_path}/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+def arrows_big(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.ToPILImage(),
+                        #transforms.Resize(64),
+                        #transforms.Pad(2),
+                        transforms.Grayscale(),
+                        #transforms.CenterCrop(64),
+                        #transforms.Grayscale(),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5,), (0.5,)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = '/home/rm360179/datasets/arrows_big'
+    train_loader = get_loader(f'{dataset_path}/train/')
+    train_val_loader = get_loader(f'{dataset_path}/train_val/')
+    val_loader = get_loader(f'{dataset_path}/val/')
+
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("arrows big does not contain y labels")
+
+
+
+def arrows_small(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.ToPILImage(),
+                        #transforms.Resize(64),
+                        transforms.Pad((2, 2, 3, 3)),
+                        transforms.Grayscale(),
+                        #transforms.CenterCrop(64),
+                        #transforms.Grayscale(),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5,), (0.5,)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = '/home/rm360179/datasets/arrows_small'
+    train_loader = get_loader(f'{dataset_path}/train/')
+    train_val_loader = get_loader(f'{dataset_path}/train_val/')
+    val_loader = get_loader(f'{dataset_path}/val/')
+
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("arrows big does not contain y labels")
+
+
+
+def cifar_20_picked_inds_2(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = "/home/rm360179/datasets/cifar_20_picked_inds_2"
+    train_loader = get_loader(f"{dataset_path}/train/")
+    train_val_loader = get_loader(f"{dataset_path}/train_val/")
+    val_loader = get_loader(f"{dataset_path}/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+def cifar_40_picked_inds_2(batch_size, image_size, n_channels, return_y=False):
+    def get_loader(root):
+        loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                root=root,
+                transform=transforms.Compose(
+                    [
+                        #transforms.Resize(64),
+                        #transforms.CenterCrop(64),
+                        transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                    ]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=False,
+        )
+        return loader
+    dataset_path = "/home/rm360179/datasets/cifar_40_picked_inds_2"
+    train_loader = get_loader(f"{dataset_path}/train/")
+    train_val_loader = get_loader(f"{dataset_path}/train_val/")
+    val_loader = get_loader(f"{dataset_path}/val/")
+    if not return_y:
+        return train_loader, val_loader, train_val_loader
+    else:
+        raise ValueError("cifar_horses does not contain y labels")
+
+
+cifar_20_picked_inds_3 = cifar_20_picked_inds_2
+cifar_40_picked_inds_3 = cifar_40_picked_inds_2

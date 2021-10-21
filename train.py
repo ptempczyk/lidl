@@ -7,7 +7,7 @@ from torchvision import utils
 from tqdm import tqdm
 
 from model import Glow
-from samplers import memory_mnist, memory_fashion, celeba, ffhq_5, cifar_horses_40, ffhq_50
+from samplers import memory_mnist, memory_fashion, celeba, ffhq_5, cifar_horses_40, ffhq_50, cifar_horses_20, cifar_horses_80, mnist_30, mnist_gan_all, mnist_pad, cifar_horses_20_top, cifar_horses_40_top, cifar_horses_20_top_small_lr, cifar_horses_40_top_small_lr, arrows_small, arrows_big, cifar_20_picked_inds_2, cifar_40_picked_inds_2, cifar_20_picked_inds_3, cifar_40_picked_inds_3
 from utils import (
     net_args,
     calc_z_shapes,
@@ -31,6 +31,36 @@ def train(args, model, optimizer):
         dataset_f = cifar_horses_40
     elif args.dataset == "ffhq_50":
         dataset_f = ffhq_50
+    elif args.dataset == "cifar_horses_20":
+        dataset_f = cifar_horses_20
+    elif args.dataset == "cifar_horses_80":
+        dataset_f = cifar_horses_80
+    elif args.dataset == "mnist_30":
+        dataset_f = mnist_30
+    elif args.dataset == "mnist_gan_all":
+        dataset_f = mnist_gan_all
+    elif args.dataset == "mnist_pad":
+        dataset_f = mnist_pad
+    elif args.dataset == "cifar_horses_20_top":
+        dataset_f = cifar_horses_20_top
+    elif args.dataset == "cifar_horses_40_top":
+        dataset_f = cifar_horses_40_top
+    elif args.dataset == "cifar_horses_20_top_small_lr":
+        dataset_f = cifar_horses_20_top_small_lr
+    elif args.dataset == "cifar_horses_40_top_small_lr":
+        dataset_f = cifar_horses_40_top_small_lr
+    elif args.dataset == "arrows_small":
+        dataset_f = arrows_small
+    elif args.dataset == "arrows_big":
+        dataset_f = arrows_big
+    elif args.dataset == "cifar_20_picked_inds_2":
+        dataset_f = cifar_20_picked_inds_2
+    elif args.dataset == "cifar_40_picked_inds_2":
+        dataset_f = cifar_40_picked_inds_2
+    elif args.dataset == "cifar_40_picked_inds_3":
+        dataset_f = cifar_40_picked_inds_3
+    elif args.dataset == "cifar_20_picked_inds_3":
+        dataset_f = cifar_20_picked_inds_3
     else:
         raise ValueError("Unknown dataset:", args.dataset)
 
