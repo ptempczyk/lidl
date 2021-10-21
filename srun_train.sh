@@ -17,6 +17,6 @@ fi
 
 for d in `cat ./parameters/$dataset.deltas`
 do  
-    srun --partition=common  --qos=16gpu3d --gres=gpu:1 --time 3-0 python train.py --delta="$d" `cat ./parameters/$dataset.params`  --device cuda:0 &
+    srun --time 3-0 --qos=52gpu7d  --gres=gpu:1 python train.py --delta="$d" `cat ./parameters/$dataset.params`  --device cuda:0 &
 done
 deactivate
