@@ -145,7 +145,7 @@ def train(args, model, optimizer):
                 print(f"{current_loss},{args.delta},{i + 1}", file=f_test_loss)
                 epoch_losses.append(current_loss)
                 # early stopping
-                if len(epoch_losses) >= 10 and epoch_losses[-10] < min(epoch_losses[-9:]):
+                if len(epoch_losses) >= 20 and epoch_losses[-20] < min(epoch_losses[-19:]):
                     break
                 '''
                 too much space
