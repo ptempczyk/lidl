@@ -164,7 +164,7 @@ def memory_fashion(batch_size, image_size, n_channels, return_y=False):
 def celeba(batch_size, image_size, n_channels, return_y=False):
     train_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(
-            root="/home/ptempczyk/datasets/celeba/train/",
+            root="~/datasets/celeba/train/",
             transform=transforms.Compose(
                 [
                     transforms.Resize(64),
@@ -179,7 +179,7 @@ def celeba(batch_size, image_size, n_channels, return_y=False):
     )
     train_val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(
-            root="/home/ptempczyk/datasets/celeba/train_val/",
+            root="~/datasets/celeba/train_val/",
             transform=transforms.Compose(
                 [
                     transforms.Resize(64),
@@ -194,7 +194,7 @@ def celeba(batch_size, image_size, n_channels, return_y=False):
     )
     val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(
-            root="/home/ptempczyk/datasets/celeba/val/",
+            root="~/datasets/celeba/val/",
             transform=transforms.Compose(
                 [
                     transforms.Resize(64),
@@ -231,9 +231,9 @@ def ffhq_5(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/image-generator/ffhq_5/train/")
-    train_val_loader = get_loader("/home/rm360179/image-generator/ffhq_5/train_val/")
-    val_loader = get_loader("/home/rm360179/image-generator/ffhq_5/val/")
+    train_loader = get_loader("~/image-generator/ffhq_5/train/")
+    train_val_loader = get_loader("~/image-generator/ffhq_5/train_val/")
+    val_loader = get_loader("~/image-generator/ffhq_5/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -258,9 +258,9 @@ def cifar_horses_40(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/image-generator/cifar_horses_40/train/")
-    train_val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_40/train_val/")
-    val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_40/val/")
+    train_loader = get_loader("~/image-generator/cifar_horses_40/train/")
+    train_val_loader = get_loader("~/image-generator/cifar_horses_40/train_val/")
+    val_loader = get_loader("~/image-generator/cifar_horses_40/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -284,9 +284,9 @@ def ffhq_50(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/image-generator/ffhq_50/train/")
-    train_val_loader = get_loader("/home/rm360179/image-generator/ffhq_50/train_val/")
-    val_loader = get_loader("/home/rm360179/image-generator/ffhq_50/val/")
+    train_loader = get_loader("~/image-generator/ffhq_50/train/")
+    train_val_loader = get_loader("~/image-generator/ffhq_50/train_val/")
+    val_loader = get_loader("~/image-generator/ffhq_50/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -311,9 +311,9 @@ def cifar_horses_20(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/image-generator/cifar_horses_20/train/")
-    train_val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_20/train_val/")
-    val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_20/val/")
+    train_loader = get_loader("~/image-generator/cifar_horses_20/train/")
+    train_val_loader = get_loader("~/image-generator/cifar_horses_20/train_val/")
+    val_loader = get_loader("~/image-generator/cifar_horses_20/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -339,9 +339,9 @@ def cifar_horses_80(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/image-generator/cifar_horses_80/train/")
-    train_val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_80/train_val/")
-    val_loader = get_loader("/home/rm360179/image-generator/cifar_horses_80/val/")
+    train_loader = get_loader("~/image-generator/cifar_horses_80/train/")
+    train_val_loader = get_loader("~/image-generator/cifar_horses_80/train_val/")
+    val_loader = get_loader("~/image-generator/cifar_horses_80/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -370,9 +370,9 @@ def mnist_30(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/datasets/mnist_30/train/")
-    train_val_loader = get_loader("/home/rm360179/datasets/mnist_30/train_val/")
-    val_loader = get_loader("/home/rm360179/datasets/mnist_30/val/")
+    train_loader = get_loader("~/datasets/mnist_30/train/")
+    train_val_loader = get_loader("~/datasets/mnist_30/train_val/")
+    val_loader = get_loader("~/datasets/mnist_30/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -401,9 +401,9 @@ def mnist_gan_all(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    train_loader = get_loader("/home/rm360179/datasets/mnist_gan_all/train/")
-    train_val_loader = get_loader("/home/rm360179/datasets/mnist_gan_all/train_val/")
-    val_loader = get_loader("/home/rm360179/datasets/mnist_gan_all/val/")
+    train_loader = get_loader("~/datasets/mnist_gan_all/train/")
+    train_val_loader = get_loader("~/datasets/mnist_gan_all/train_val/")
+    val_loader = get_loader("~/datasets/mnist_gan_all/val/")
     if not return_y:
         return train_loader, val_loader, train_val_loader
     else:
@@ -475,7 +475,7 @@ def cifar_horses_20_top(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    dataset_path = "/home/rm360179/datasets/cifar_horses_20_top"
+    dataset_path = "~/datasets/cifar_horses_20_top"
     train_loader = get_loader(f"{dataset_path}/train/")
     train_val_loader = get_loader(f"{dataset_path}/train_val/")
     val_loader = get_loader(f"{dataset_path}/val/")
@@ -504,7 +504,7 @@ def cifar_horses_40_top(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    dataset_path = "/home/rm360179/datasets/cifar_horses_40_top"
+    dataset_path = "~/datasets/cifar_horses_40_top"
     train_loader = get_loader(f"{dataset_path}/train/")
     train_val_loader = get_loader(f"{dataset_path}/train_val/")
     val_loader = get_loader(f"{dataset_path}/val/")
@@ -532,7 +532,7 @@ def cifar_horses_20_top_small_lr(batch_size, image_size, n_channels, return_y=Fa
             shuffle=False,
         )
         return loader
-    dataset_path = "/home/rm360179/datasets/cifar_horses_20_top"
+    dataset_path = "~/datasets/cifar_horses_20_top"
     train_loader = get_loader(f"{dataset_path}/train/")
     train_val_loader = get_loader(f"{dataset_path}/train_val/")
     val_loader = get_loader(f"{dataset_path}/val/")
@@ -561,7 +561,7 @@ def cifar_horses_40_top_small_lr(batch_size, image_size, n_channels, return_y=Fa
             shuffle=False,
         )
         return loader
-    dataset_path = "/home/rm360179/datasets/cifar_horses_40_top"
+    dataset_path = "~/datasets/cifar_horses_40_top"
     train_loader = get_loader(f"{dataset_path}/train/")
     train_val_loader = get_loader(f"{dataset_path}/train_val/")
     val_loader = get_loader(f"{dataset_path}/val/")
@@ -593,7 +593,7 @@ def arrows_big(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    dataset_path = '/home/rm360179/datasets/arrows_big'
+    dataset_path = '~/datasets/arrows_big'
     train_loader = get_loader(f'{dataset_path}/train/')
     train_val_loader = get_loader(f'{dataset_path}/train_val/')
     val_loader = get_loader(f'{dataset_path}/val/')
@@ -627,7 +627,7 @@ def arrows_small(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    dataset_path = '/home/rm360179/datasets/arrows_small'
+    dataset_path = '~/datasets/arrows_small'
     train_loader = get_loader(f'{dataset_path}/train/')
     train_val_loader = get_loader(f'{dataset_path}/train_val/')
     val_loader = get_loader(f'{dataset_path}/val/')
@@ -657,7 +657,7 @@ def cifar_20_picked_inds_2(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    dataset_path = "/home/rm360179/datasets/cifar_20_picked_inds_2"
+    dataset_path = "~/datasets/cifar_20_picked_inds_2"
     train_loader = get_loader(f"{dataset_path}/train/")
     train_val_loader = get_loader(f"{dataset_path}/train_val/")
     val_loader = get_loader(f"{dataset_path}/val/")
@@ -685,7 +685,7 @@ def cifar_40_picked_inds_2(batch_size, image_size, n_channels, return_y=False):
             shuffle=False,
         )
         return loader
-    dataset_path = "/home/rm360179/datasets/cifar_40_picked_inds_2"
+    dataset_path = "~/datasets/cifar_40_picked_inds_2"
     train_loader = get_loader(f"{dataset_path}/train/")
     train_val_loader = get_loader(f"{dataset_path}/train_val/")
     val_loader = get_loader(f"{dataset_path}/val/")
