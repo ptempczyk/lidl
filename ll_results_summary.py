@@ -76,9 +76,6 @@ def summary(ll_path, epochs, deltas_count, deltas_total):
 
 
 
-#summary(f"/home/rm360179/glow-pytorch/results_ffhq_50/ll", 75)
-#summary(f"/home/rm360179/glow-pytorch/ll", 40)
-
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", help="number of epochs", required=True)
 parser.add_argument("-ll", help="path to ll", required=True)
