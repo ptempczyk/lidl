@@ -10,3 +10,6 @@ PyTorch implementation of experiments from paper [LIDL: Local Intrinsic Dimensio
 `pip install -r requirements.txt`
 
 ## Running experiments
+
+Add your dataset to samplers.py or us an existing one
+run experiments using run_train.sh or train.py script (this may require huge amount of memory)
