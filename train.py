@@ -7,7 +7,29 @@ from torchvision import utils
 from tqdm import tqdm
 
 from model import Glow
-from samplers import memory_mnist, memory_fashion, celeba, ffhq_5, cifar_horses_40, ffhq_50, cifar_horses_20, cifar_horses_80, mnist_30, mnist_gan_all, mnist_pad, cifar_horses_20_top, cifar_horses_40_top, cifar_horses_20_top_small_lr, cifar_horses_40_top_small_lr, arrows_small, arrows_big, cifar_20_picked_inds_2, cifar_40_picked_inds_2, cifar_20_picked_inds_3, cifar_40_picked_inds_3
+from samplers import (
+    memory_mnist,
+    memory_fashion,
+    celeba,
+    ffhq_5,
+    cifar_horses_40,
+    ffhq_50,
+    cifar_horses_20,
+    cifar_horses_80,
+    mnist_30,
+    mnist_gan_all,
+    mnist_pad,
+    cifar_horses_20_top,
+    cifar_horses_40_top,
+    cifar_horses_20_top_small_lr,
+    cifar_horses_40_top_small_lr,
+    arrows_small,
+    arrows_big,
+    cifar_20_picked_inds_2,
+    cifar_40_picked_inds_2,
+    cifar_20_picked_inds_3,
+    cifar_40_picked_inds_3,
+)
 from utils import (
     net_args,
     calc_z_shapes,
@@ -145,15 +167,17 @@ def train(args, model, optimizer):
                 print(f"{current_loss},{args.delta},{i + 1}", file=f_test_loss)
                 epoch_losses.append(current_loss)
                 # early stopping
-                if len(epoch_losses) >= 20 and epoch_losses[-20] < min(epoch_losses[-19:]):
+                if len(epoch_losses) >= 20 and epoch_losses[-20] < min(
+                    epoch_losses[-19:]
+                ):
                     break
-                '''
+                """
                 too much space
                 if (i + 1) % 5 == 0:
                     torch.save(
                         model.state_dict(), f"checkpoint/model_{repr_args}_{i + 1}_.pt"
                     )
-                '''
+                """
                 torch.save(model.state_dict(), last_model_path)
                 f_epoch = open(
                     f"checkpoint/last_epoch_{repr_args}.txt", "w", buffering=1
