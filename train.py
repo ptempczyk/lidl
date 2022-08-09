@@ -17,8 +17,18 @@ from utils import (
 
 parser = net_args(argparse.ArgumentParser(description="Glow trainer"))
 
+from clearml import Task
+task_name = "mnist"
+task = Task.init(project_name="lidl", task_name=task_name, reuse_last_task_id=False)
+
+
+import torch
+from torch.utils.tensorboard import SummaryWriter
+writer = SummaryWriter()
+
 
 def train(args, model, optimizer):
+    writer.add_scalar("delta", args.delta, 0)
     if args.dataset == "mnist":
         dataset_f = memory_mnist
     elif args.dataset == "fashion_mnist":
@@ -115,6 +125,7 @@ def train(args, model, optimizer):
                 train_losses.append(loss.item())
             current_train_loss = np.mean(train_losses)
             print(f"{current_train_loss},{args.delta},{i + 1}", file=f_train_loss)
+            writer.add_scalar("loss/train", current_train_loss, i + 1)
             with torch.no_grad():
                 utils.save_image(
                     model.reverse(z_sample).cpu().data,
@@ -143,6 +154,7 @@ def train(args, model, optimizer):
                 )
                 current_loss = np.mean(losses)
                 print(f"{current_loss},{args.delta},{i + 1}", file=f_test_loss)
+                writer.add_scalar("loss/test", current_loss, i + 1)
                 epoch_losses.append(current_loss)
                 # early stopping
                 if len(epoch_losses) >= 20 and epoch_losses[-20] < min(epoch_losses[-19:]):
@@ -193,6 +205,11 @@ def train(args, model, optimizer):
                             ldtv.item(),
                             file=f_ll,
                         )
+                        writer.add_scalar("logs/delta", args.delta, i + 1)
+                        writer.add_scalar("logs/lpv", lpv.item(), i + 1)
+                        writer.add_scalar("logs/ldv", ldv.item(), i + 1)
+                        writer.add_scalar("logs/lptv", lptv.item(), i + 1)
+                        writer.add_scalar("logs/ldtv", ldtv.item(), i + 1)
                 f_ll.close()
     f_train_loss.close()
     f_test_loss.close()

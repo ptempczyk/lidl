@@ -1,0 +1,8 @@
+future
+numpy
+Pillow
+pkg-resources
+scipy
+torch
+torchvision
+tqdm
